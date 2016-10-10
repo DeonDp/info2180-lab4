@@ -1,13 +1,17 @@
 window.onload =function handler() {
 
-	var walls =document.getElementsByTagName('div');
-	
-	for (var i =2; i <=6; i++) {
-		walls[i].setAttribute('onmouseover','testTraversal(this)');
+	var walls =document.querySelectorAll('div.boundary');
+
+	for (var i =0; i <=4; i++) {
+		walls[i].setAttribute('onmouseover','testTraversal()');
 	}
-	
 };
 
-function testTraversal(element) {
-	element.setAttribute('style','background-color:#ff8888');
+function testTraversal() {
+	var walls =document.querySelectorAll('div.boundary');
+
+	for (var i =0; i <=4; i++) {
+		walls[i].setAttribute('style','background-color:#ff8888');
+	}
+	
 }
