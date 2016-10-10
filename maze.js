@@ -11,13 +11,14 @@ window.onload =function handler() {
 	}
 
 	win.setAttribute('onmouseover','victory()');
+	endState();
 };
 
 function testTraversal() {
-	
-	alert('You Lose!');
-	var walls =document.querySelectorAll('div.boundary');
 
+	var walls =document.querySelectorAll('div.boundary');
+	document.getElementById('status').innerHTML ='You Lose!';
+	
 	for (var i =0; i <=4; i++) {
 		walls[i].setAttribute('style','background-color:#ff8888');
 	}	
@@ -26,15 +27,17 @@ function testTraversal() {
 function victory() {
 
 	if(document.getElementById('boundary1').getAttribute('style') == 'background-color:#ff8888') {
-		alert('You must go through the maze \nwithout hitting the walls!');
+		document.getElementById('status').innerHTML ='Sorry!\n<br />You must go through the maze\n<br />without hitting the walls';
 	}	
 	else {
-		alert('You Win!');
+		document.getElementById('status').innerHTML ='You Win!';
 	}
 }
 
 function init() {
+
 	var walls =document.querySelectorAll('div.boundary');
+	document.getElementById('status').innerHTML ='Move your mouse over the "S" to begin.';
 
 	for (var i =0; i <=4; i++) {
 		walls[i].setAttribute('style','background-color: #eeeeee');
