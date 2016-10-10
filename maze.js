@@ -1,7 +1,10 @@
 window.onload =function handler() {
 
+	var start =document.getElementById('start');
 	var win =document.getElementById('end');
-	var walls =document.querySelectorAll('#maze div.boundary');
+	var walls =document.querySelectorAll('div.boundary');
+
+	start.setAttribute('onclick','init()');
 
 	for (var i =0; i <=4; i++) {
 		walls[i].setAttribute('onmouseover','testTraversal()');
@@ -27,5 +30,13 @@ function victory() {
 	}	
 	else {
 		alert('You Win!');
+	}
+}
+
+function init() {
+	var walls =document.querySelectorAll('div.boundary');
+
+	for (var i =0; i <=4; i++) {
+		walls[i].setAttribute('style','background-color: #eeeeee');
 	}
 }
