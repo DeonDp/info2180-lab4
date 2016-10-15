@@ -4,6 +4,8 @@ window.onload =function handler() {
 	var win =document.getElementById('end');
 	var walls =document.querySelectorAll('div.boundary');
 
+	start.setAttribute('onmouseover','gameStarted()');
+	start.setAttribute('onmouseout','validPlay()');
 	start.setAttribute('onclick','init()');
 
 	for (var i =0; i <=4; i++) {
@@ -11,26 +13,37 @@ window.onload =function handler() {
 	}
 
 	win.setAttribute('onmouseover','victory()');
-	endState();
 };
 
-function testTraversal() {
+var started =false;
 
-	var walls =document.querySelectorAll('div.boundary');
-	document.getElementById('status').innerHTML ='You Lose!';
-	
-	for (var i =0; i <=4; i++) {
-		walls[i].setAttribute('style','background-color:#ff8888');
+function gameStarted() {
+	started =true;
+}
+
+function testTraversal() {
+	if (started) {
+		var walls =document.querySelectorAll('div.boundary');
+		document.getElementById('status').innerHTML ='You Lose!';
+		
+		for (var i =0; i <=4; i++) {
+			walls[i].setAttribute('style','background-color:#ff8888');
+		}
 	}	
 }
 
 function victory() {
 
 	if(document.getElementById('boundary1').getAttribute('style') == 'background-color:#ff8888') {
-		document.getElementById('status').innerHTML ='Sorry!\n<br />You must go through the maze\n<br />without hitting the walls';
+		document.getElementById('status').innerHTML ='You Lose!';
 	}	
 	else {
-		document.getElementById('status').innerHTML ='You Win!';
+		if (started) {
+			document.getElementById('status').innerHTML ='You Win!';
+		}
+		else {
+			document.getElementById('status').innerHTML ='Sorry!\n<br />You must go through the maze\n<br />without hitting the walls';
+		}
 	}
 }
 
@@ -41,5 +54,19 @@ function init() {
 
 	for (var i =0; i <=4; i++) {
 		walls[i].setAttribute('style','background-color: #eeeeee');
+	}
+}
+
+function validPlay() {
+
+	var divLeftParam =document.getElementById('maze').offsetLeft;
+	var locateMouse =event.clientX;
+
+	if(locateMouse < divLeftParam) {
+		document.getElementById('status').innerHTML ='Sorry!\n<br />You must go through the maze\n<br />without hitting the walls';
+		return false;
+	}
+	else {
+		return true;
 	}
 }
